@@ -79,10 +79,16 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class CounterComponent {
-    lifeTotal = signal(20);
+  standardMaxLife = 20;
+    lifeTotal = signal(this.standardMaxLife);
     upsideDown = input(false);
     // randomize color scheme on load
     colorScheme: 'blue' | 'red' | 'green' | 'black' = (['blue', 'red', 'green', 'black'] as const)[Math.floor(Math.random() * 4)];
+
+  setNewLifeTotal(newTotal: number) {
+        this.lifeTotal.set(newTotal);
+        this.standardMaxLife = newTotal;
+    }
 
     incrementLife() {
         this.lifeTotal.update(current => current + 1);
@@ -93,6 +99,7 @@ export class CounterComponent {
     }
 
     resetLife() {
-        this.lifeTotal.set(20);
+        this.lifeTotal.set(this.standardMaxLife);
+        console.log('setting to std life max', this.standardMaxLife);
     }
 }

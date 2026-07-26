@@ -147,5 +147,6 @@ export class SettingsMenuComponent {
     if (playerCount !== null && !isNaN(Number(playerCount))) {
         this.changePlayerCount.emit(Number(playerCount));
     }
+    this.toggleMenu();
   }
 }

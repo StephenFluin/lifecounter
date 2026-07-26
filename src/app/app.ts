@@ -19,7 +19,6 @@ export class App {
     Array.from({ length: Math.ceil(this.players() / 2) }, (_, i) => i + 1)
   );
 
-  // Grab all instances of CounterComponent in the template
   counters = viewChildren(CounterComponent);
 
   wakeLock = inject(WakeLock);
@@ -30,7 +29,7 @@ changePlayerCount(newCount: number) {
 
   setAllLives(lifeTotal: number) {
     for(const counter of this.counters()) {
-      counter.lifeTotal.set(lifeTotal);
+      counter.setNewLifeTotal(lifeTotal);
     }
   }
 

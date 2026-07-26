@@ -7,20 +7,16 @@
 </style>
 
 <div class="game-container">
-  <div class="player-container player1">
     <app-counter 
       #player1Counter
-      [upsideDown]="false"
-      [colorScheme]="'blue'">
+      [upsideDown]="true"
+      colorScheme="blue">
     </app-counter>
-  </div>
 
-  <div class="player-container player2">
     <app-counter 
       #player2Counter
-      [upsideDown]="true"
-      [colorScheme]="'red'">
-    </app-counter>
+      [upsideDown]="false"
+      colorScheme="red"/>
   </div>
 
   <app-settings-menu></app-settings-menu>

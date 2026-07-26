@@ -2,47 +2,40 @@ import { Component, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-counter',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
-    <div class="counter-container" [ngClass]="{ 'upside-down': upsideDown() }">
-      <div class="counter-wrapper">
+    selector: 'app-counter',
+    standalone: true,
+    imports: [CommonModule],
+    template: `
         <div class="left-tap-zone" (click)="decrementLife()"></div>
         <div class="life-display" [ngClass]="'color-' + colorScheme()">
           {{ lifeTotal() }}
         </div>
         <div class="right-tap-zone" (click)="incrementLife()"></div>
-      </div>
-    </div>
   `,
-  styles: [`
-    .counter-container {
+    host: {
+        "[class.upside-down]": "upsideDown()",
+    },
+    styles: [`
+    :host {
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s ease;
-
-      &.upside-down {
+      
+    }
+     :host.upside-down {
         transform: rotate(180deg);
       }
-    }
-
-    .counter-wrapper {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
-      gap: 0;
-    }
+    
 
     .left-tap-zone,
     .right-tap-zone {
       cursor: pointer;
       user-select: none;
       transition: opacity 0.2s ease;
+      flex:auto;
+      height:100%;
 
       &:active {
         opacity: 0.7;
@@ -56,7 +49,7 @@ import { CommonModule } from '@angular/common';
       align-items: center;
       justify-content: center;
       border-radius: 16px;
-      transition: all 0.2s ease;
+      flex-grow:0;
 
       &.color-blue {
         background: linear-gradient(135deg, #0047AB 0%, #4169E1 100%);
@@ -85,19 +78,19 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class CounterComponent {
-  lifeTotal = signal(20);
-  upsideDown = input(false);
-  colorScheme = input<'blue' | 'red' | 'green' | 'black'>('blue');
+    lifeTotal = signal(20);
+    upsideDown = input(false);
+    colorScheme = input<'blue' | 'red' | 'green' | 'black'>('blue');
 
-  incrementLife() {
-    this.lifeTotal.update(current => current + 1);
-  }
+    incrementLife() {
+        this.lifeTotal.update(current => current + 1);
+    }
 
-  decrementLife() {
-    this.lifeTotal.update(current => current - 1);
-  }
+    decrementLife() {
+        this.lifeTotal.update(current => current - 1);
+    }
 
-  resetLife() {
-    this.lifeTotal.set(20);
-  }
+    resetLife() {
+        this.lifeTotal.set(20);
+    }
 }

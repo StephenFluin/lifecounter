@@ -23,9 +23,7 @@ import { CommonModule } from '@angular/common';
           <button class="menu-item" (click)="onSetLife()">
             Set Custom Life Total
           </button>
-          <button class="menu-item" (click)="toggleMenu()">
-            Close
-          </button>
+
         </div>
       }
     </div>

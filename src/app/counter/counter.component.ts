@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
     imports: [CommonModule],
     template: `
         <div class="left-tap-zone" (click)="decrementLife()"></div>
-        <div class="life-display" [ngClass]="'color-' + colorScheme()">
+        <div class="life-display" [ngClass]="'color-' + colorScheme">
           {{ lifeTotal() }}
         </div>
         <div class="right-tap-zone" (click)="incrementLife()"></div>
@@ -81,7 +81,8 @@ import { CommonModule } from '@angular/common';
 export class CounterComponent {
     lifeTotal = signal(20);
     upsideDown = input(false);
-    colorScheme = input<'blue' | 'red' | 'green' | 'black'>('blue');
+    // randomize color scheme on load
+    colorScheme: 'blue' | 'red' | 'green' | 'black' = (['blue', 'red', 'green', 'black'] as const)[Math.floor(Math.random() * 4)];
 
     incrementLife() {
         this.lifeTotal.update(current => current + 1);

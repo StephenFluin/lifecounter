@@ -7,16 +7,15 @@
 </style>
 
 <div class="game-container">
-    <app-counter 
-      #player1Counter
-      [upsideDown]="true"
-      colorScheme="blue">
-    </app-counter>
-
-    <app-counter 
-      #player2Counter
-      [upsideDown]="false"
-      colorScheme="red"/>
+  <div class="top-row">
+    @for (p of topArray(); track p) {
+      <app-counter [upsideDown]="true"></app-counter>
+    }
+  </div>
+  <div class="bottom-row">
+    @for (p of bottomArray(); track p) {
+      <app-counter></app-counter>
+    }
   </div>
 
-  <app-settings-menu></app-settings-menu>
+  <app-settings-menu (changePlayerCount)="changePlayerCount($event)" (reset)="reset()" (setAllLives)="setAllLives($event)"></app-settings-menu>

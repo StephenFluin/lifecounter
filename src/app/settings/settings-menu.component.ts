@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,11 +18,13 @@ import { CommonModule } from '@angular/common';
       @if (isOpen()) {
         <div class="menu-panel">
           <button class="menu-item reset-button" (click)="onResetAll()">
-            Reset Both Counters
+            Reset Counters
           </button>
           <button class="menu-item" (click)="onSetLife()">
             Set Custom Life Total
           </button>
+          <button class="menu-item" (click)="changePlayers()">Change Player Count
+      </button>
 
         </div>
       }
@@ -119,26 +121,31 @@ import { CommonModule } from '@angular/common';
 })
 export class SettingsMenuComponent {
   isOpen = signal(false);
+  changePlayerCount = output<number>();
+  setAllLives = output<number>();
+  reset = output<void>();
+
+  onResetAll() {
+    this.reset.emit();
+    this.toggleMenu();
+  }
+
 
   toggleMenu() {
     this.isOpen.update(val => !val);
   }
 
-  onResetAll() {
-    // This will be handled by parent component
-    const event = new CustomEvent('resetAll');
-    window.dispatchEvent(event);
-    this.toggleMenu();
-  }
-
   onSetLife() {
-    const lifeTotal = prompt('Enter new life total:', '20');
+    const lifeTotal = prompt('Enter new life for all players:', '20');
     if (lifeTotal !== null && !isNaN(Number(lifeTotal))) {
-      const event = new CustomEvent('setLife', { 
-        detail: { lifeTotal: Number(lifeTotal) } 
-      });
-      window.dispatchEvent(event);
+      this.setAllLives.emit(Number(lifeTotal));
     }
     this.toggleMenu();
+  }
+  changePlayers() {
+    const playerCount = prompt('Enter number of players:', '2');
+    if (playerCount !== null && !isNaN(Number(playerCount))) {
+        this.changePlayerCount.emit(Number(playerCount));
+    }
   }
 }

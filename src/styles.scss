@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  /* Disables all browser touch behaviors like panning and pinch-to-zoom */
+  touch-action: none; 
+  /* Prevents text highlighting when rapidly tapping buttons */
+  user-select: none; 
+  -webkit-user-select: none; 
+}

@@ -1,18 +1,18 @@
 .game-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+  display: flex;
+  flex-direction: column;
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
+.top-row,
+.bottom-row {
+  flex: 1;
+  display: flex;
 
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-  .game-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+  > app-counter {
+    flex: 1;
   }
 }

@@ -44,6 +44,7 @@ import { CommonModule } from '@angular/common';
 
     .life-display {
       font-size: 120px;
+      padding:32px;
       font-weight: bold;
       display: flex;
       align-items: center;
